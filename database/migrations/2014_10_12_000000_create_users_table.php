@@ -1,13 +1,14 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateUsersTable extends Migration
 {
     /**
-     * Run the migrations.
+     * 用戶表
      *
      * @return void
      */
@@ -15,13 +16,14 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('name')->comment('暱稱');
+            $table->string('email')->unique()->comment('信箱');
+            $table->string('password')->comment('密碼');
+            $table->string('avatar')->default("/img/default.png")->comment('頭像');
             $table->rememberToken();
             $table->timestamps();
         });
+        DB::statement("ALTER TABLE `users` comment '用戶表'");
     }
 
     /**

@@ -1,23 +1,24 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePasswordResetsTable extends Migration
+class CreateChatroomsTable extends Migration
 {
     /**
-     * Run the migrations.
+     * 聊天室表
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('password_resets', function (Blueprint $table) {
-            $table->string('email')->index();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
+        Schema::create('chatrooms', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
+        DB::statement("ALTER TABLE `chatrooms` comment '聊天室表'");
     }
 
     /**
@@ -27,6 +28,6 @@ class CreatePasswordResetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('password_resets');
+        Schema::dropIfExists('chatrooms');
     }
 }
